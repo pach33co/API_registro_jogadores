@@ -1,4 +1,5 @@
 import { JogadorModel } from "../models/jogador.model.js";
+import { JogadorService } from "../service/jogador.service.js";
 
 export class JogadorController {
 
@@ -58,15 +59,15 @@ export class JogadorController {
         try {
 
             const jogador = req.body;
-            // /\d/ -> significa "algum dígito numérico" | .test -> retorna true ou false
-            if (/\d/.test(jogador.nome)) {
-                return res.status(400).send({ "mensagem": "O nome do jogador não pode ter número" })
-            }
-            const novoJogador = await JogadorModel.criar(jogador);
+            const novoJogador = await JogadorService.criar(jogador);
             return res.status(201).json(novoJogador)
 
         } catch (erro) {
-            return res.status(500).send(erro.message)
+            if (erro.message === "O nome do jogador não pode ter número") {
+                return res.status(400).json({ mensagem: erro.message })
+            } else {
+                return res.status(500).json({ mensagem: erro.message })
+            }
         }
     }
 
