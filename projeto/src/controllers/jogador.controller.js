@@ -63,9 +63,20 @@ export class JogadorController {
             return res.status(201).json(novoJogador)
 
         } catch (erro) {
+            
             if (erro.message === "O nome do jogador não pode ter número") {
                 return res.status(400).json({ mensagem: erro.message })
-            } else {
+            } 
+            
+            else if (erro.message === "A idade do jogador não pode ser igual ou menor que zero") {
+                return res.status(400).json({ mensagem: erro.message })
+            }
+
+            else if (erro.message === "A altura do jogador precisa estar entre 1.00 e 2.30") {
+                return res.status(400).json({ mensagem: erro.message })
+            }
+            
+            else {
                 return res.status(500).json({ mensagem: erro.message })
             }
         }
