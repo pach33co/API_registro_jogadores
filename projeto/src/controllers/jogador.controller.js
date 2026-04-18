@@ -75,6 +75,18 @@ export class JogadorController {
             else if (erro.message === "A altura do jogador precisa estar entre 1.00 e 2.30") {
                 return res.status(400).json({ mensagem: erro.message })
             }
+
+            else if (erro.message === "O peso do jogador precisa estar entre 30.00 e 120.00") {
+                return res.status(400).json({ mensagem: erro.message })
+            }
+
+            else if (erro.message === "As posições habilitadas são: Goleiro, Lateral, Zagueiro, Meio-Campo, Atacante") {
+                return res.status(400).json({ mensagem: erro.message })
+            }
+
+            else if (erro.message === "As nacionalidades habilitadas são: Brasileiro, Argentino, Venezuelano, Colombiano, Uruguaio, Europeu") {
+                return res.status(400).json({ mensagem: erro.message})
+            }
             
             else {
                 return res.status(500).json({ mensagem: erro.message })
